@@ -1,0 +1,57 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+<script>
+    const PostDetailApp = {
+        delimiters:['[[',']]'], // Vue랑 Django 템플릿 충돌 방지
+        data(){
+            return {
+                post:{},   //Post 목록 데이터를 저장할 변수 
+                prevPost:{},
+                nextPost:{},
+                cateList:[],
+                tagList:[],
+
+            };
+        },
+        created(){
+            console.log("created()...");
+            const postId = location.pathname.split('/')[3];
+            this.fetchPostDetail(postId); //컴포넌트가 생성될 때 게시물 목록을 불러옵니다.
+            this.fetchCateTagList();
+        },
+        methods: {
+            fetchPostDetail(postId) {
+                console.log("fetchPostDetail()...",postId)
+
+
+                axios.get(`/api/post/${postId}`)
+                .then(res => {
+                    console.log("FETCH POSTDETAIL GET RES", res);
+                    this.post = res.data.post;
+                    this.prevPost = res.data.prevPost;
+                    this.nextPost = res.data.nextPost;
+                })
+                .catch(err => {
+                    console.log("FETCH POSTDETAIL GET ERR.RESPONSE", err.response);
+                    alert(`${err.response.status} ${err.response.statusText}`);
+                });
+
+            },
+            fetchCateTagList(){
+                console.log("fetchCateTagList()...");
+                axios.get('/api/catetag')
+                .then(res =>{
+                    console.log("FATCH CATEAG LIST RES",res);
+                    this.cateList = res.data.cateList;
+                    this.tagList = res.data.tagList;
+                })
+                .catch(err => {
+                    console.error("Error fetching category and tag list:", err.response)
+                    alert(`${err.response.status} ${err.response.statusText}`);
+                });
+            },
+        },
+
+    };
+    Vue.createApp(PostDetailApp).mount('#page-top')
+</script>
