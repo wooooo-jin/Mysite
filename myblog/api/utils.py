@@ -49,3 +49,15 @@ def prev_next_post(obj):
         nextDict = {}
         
     return prevDict, nextDict
+
+def obj_to_comment(obj):
+    comment = dict(vars(obj))
+
+    if obj.update_date:
+        comment['update_date'] =obj.update_date.strftime("%Y-%m-%d %H:%M:%S")
+    else:
+        comment['update_date'] = '9999-12-31 00:00:00'
+
+    del comment['_state'],comment['post_id'], comment['create_date']
+
+    return comment

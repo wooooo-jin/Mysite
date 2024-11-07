@@ -5,18 +5,32 @@
         delimiters:['[[',']]'], // Vue랑 Django 템플릿 충돌 방지
         data(){
             return {
-                postList: [] //Post 목록 데이터를 저장할 변수 
+                postList: [], //Post 목록 데이터를 저장할 변수 
+                category: "",
+                tag: "",
+
             };
         },
         created(){
             console.log("created()...");
-            this.fetchPostList(); //컴포넌트가 생성될 때 게시물 목록을 불러옵니다.
+            const params = new URL(location).searchParams;
+            this.category = params.get('category');
+            this.tag = params.get('tag');
+            this.fetchPostList();   //컴포넌트가 생성될 때 게시물 목록을 불러옵니다.
         },
         methods: {
             fetchPostList() {
-                axios.get('/api/post/list/')
+                console.log("fatchPsotList()...", this.category, this.tag);
+                let getUrl = '';
+                if (this.category) getUrl=`/api/post/list/?category=${this.category}`;
+                else if (this.tag) getUrl=`/api/post/list/?tag=${this.tag}`;
+                else getUrl = '/api/post/list';
+
+
+
+                axios.get(getUrl)
                 .then(res => {
-                    console.log("FETCH POSTLIST GET RES", res);
+                    console.log("FETCH POSTLIST GET RES", res,getUrl);
                     this.postList = res.data;
                 })
                 .catch(err => {
