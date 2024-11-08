@@ -29,12 +29,12 @@
             fetchPostDetail(postId) {
                 console.log("fetchPostDetail()...",postId)
                 axios.get(`/api/post/${postId}`)
-                  .then(res => {
-                        console.log("FETCH POSTDETAIL GET RES", res);
-                        this.post = res.data.post;
-                        this.prevPost = res.data.prevPost;
-                        this.nextPost = res.data.nextPost;
-                        this.commentList = res.data.commentList;
+                .then(res => {
+                     console.log("FETCH POSTDETAIL GET RES", res);
+                     this.post = res.data.post;
+                     this.prevPost = res.data.prevPost;
+                    this.nextPost = res.data.nextPost;
+                     this.commentList = res.data.commentList;
                 })
                 .catch(err => {
                     console.log("FETCH POSTDETAIL GET ERR.RESPONSE", err.response);

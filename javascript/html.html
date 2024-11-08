@@ -1,0 +1,117 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>My First Web Page</h2>
+    <p>My first paragraph.</p>
+    <button type="button" onclick="document.write(5 + 6)">
+    Try it
+    </button>
+
+    <p id = "demo"></p>
+
+   // <기본적으로 자바스크립트는 페이지의 렌더링을 차단. p 테그까지 파싱이 끝난 상태에서 스크립트 실행.>
+    <script>
+        document.getElementById("demo").innerHTML = 5 + 6 ; 
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+// let num1 = 456;
+// let num2 = 111;
+
+// // console.log(num1 -(num1%100))
+// let num = 12345;
+// // 숫자는 10000의 자리수만 제공
+// let num1 = num - 12345 % 10000; // 10000
+// let num2 = num - num % 1000 - num1;//2000
+// let num3 = num - num%100 -num1 -num2;// 300
+// let num4 = num - num%10 -num1 -num2 -num3; //40
+// let num5 = num%10 //5
+// console.log(num1/10000 + num2/1000+ num3/100 + num4/10 + num5)
+
+
+// let numStr = num.toString();
+
+// let one = Number(numStr[4])
+// let two = Number(numStr[3])
+// let three = Number(numStr[2])
+// let four = Number(numStr[1])
+// let five = Number(numStr[0])
+
+// console.log(one+two+three+four+five)
+
+// let input = Number(prompt('숫자를 입력해주세요', '숫자'));
+
+// switch(input % 2){
+//     case 0:
+//         alret("짝수")
+//         break;
+//     case 1:
+//         console.log("홀수")
+//         break;
+//     default:
+//         conosle.log("예외")
+
+// }
+
+// for (let i = 1; i <=5; i++){
+//     let star = ""
+//     for (let j=1; j<=i; j++){
+//         star +="*"
+//     } 
+//     console.log(star)
+// }
+
+// for (let i = 5; i > 0; i--){
+//     let star = ""
+//     for (let j=1; j>i; j--){
+//         star +="*"
+//     } 
+//     console.log(star)
+// }
+
+function createItemTemplate(category) {
+  const items = [];
+
+  return function addItem(item) {
+    items.push({ category, item });
+    console.log(items);
+  };
+}
+
+const addFruit = createItemTemplate('Fruit');
+addFruit('Apple'); // 출력: [{ category: 'Fruit', item: 'Apple' }]
+addFruit('Banana'); // 출력: [{ category: 'Fruit', item: 'Apple' }, { category: 'Fruit', item: 'Banana' }]
+
+const addVegetable = createItemTemplate('Vegetable');
+addVegetable('Carrot'); // 출력: [{ category: 'Vegetable', item: 'Carrot' }]
+const filterEvenNumbers = number => number.filter(numbers => numbers %2 == 0);
+
+const numbers = [1, 2, 3, 4, 5, 6];
+const evenNumbers = filterEvenNumbers(numbers);
+
+console.log(evenNumbers);
+consoel.log(numbers)
+
+
+
+const filterLongStrings = stri => stri.filter(s => s.length >= 5);
+const strings = ['apple', 'banana', 'cherry', 'date', 'fig'];
+const longStrings = filterLongStrings(strings);
+
+
+console.log(longStrings); // ['banana', 'cherry'] 출력
+
+
+</script>
+</body>
+</html
