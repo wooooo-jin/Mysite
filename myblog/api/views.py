@@ -1,12 +1,12 @@
+from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic.list import BaseListView
 from blog.models import Post  # Post 모델을 명시적으로 가져옵니다.
-from api.utils import obj_to_post, prev_next_post, obj_to_comment
 from django.views.generic.detail import BaseDetailView
 from django.views.generic.edit import BaseCreateView
 from django.views import View
 from blog.models import Post, Category, Tag, Comment
-
+from api.utils import obj_to_post, prev_next_post, obj_to_comment
 
 
 
@@ -19,12 +19,11 @@ class ApiPostLV(BaseListView):
     def get_queryset(self):
        paramCate = self.request.GET.get('category')
        paramTag = self.request.GET.get('tag')
-       print(paramCate)
-       print(paramTag)
+
        if paramCate:
-           qs =Post.objects.filter(category__name__iexact= paramCate)
+           qs = Post.objects.filter(category__name__iexact = paramCate)
        elif paramTag:
-           qs = Post.objects.filter(tags__name__iexact= paramTag)
+           qs = Post.objects.filter(tags__name__iexact = paramTag)
        else:
            qs = Post.objects.all()
        return qs
@@ -67,7 +66,6 @@ class ApiCateTagView(View):
             'cateList':cateList,
             'tagList': tagList,
         }
-
         return JsonResponse(data=jsonData, safe=True, status=200)
 
 class ApiPostLikeDV(BaseDetailView):
