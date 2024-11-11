@@ -30,11 +30,11 @@
                 console.log("fetchPostDetail()...",postId)
                 axios.get(`/api/post/${postId}`)
                 .then(res => {
-                     console.log("FETCH POSTDETAIL GET RES", res);
-                     this.post = res.data.post;
-                     this.prevPost = res.data.prevPost;
+                    console.log("FETCH POSTDETAIL GET RES", res);
+                    this.post = res.data.post;
+                    this.prevPost = res.data.prevPost;
                     this.nextPost = res.data.nextPost;
-                     this.commentList = res.data.commentList;
+                    this.commentList = res.data.commentList;
                 })
                 .catch(err => {
                     console.log("FETCH POSTDETAIL GET ERR.RESPONSE", err.response);
@@ -47,7 +47,7 @@
                 console.log("fetchCateTagList()...");
                 axios.get('/api/catetag/')
                 .then(res =>{
-                    console.log("FATCH CATEAG LIST RES",res,getUrl);
+                    console.log("FATCH CATEAG LIST RES",res);
                     this.cateList = res.data.cateList;
                     this.tagList = res.data.tagList;
                 })

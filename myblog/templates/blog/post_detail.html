@@ -37,7 +37,7 @@
                             <p>
                             <span>[[ post.update_date ]] </span>&emsp;
                             <i class="fas fa-copyright"></i> &nbsp;
-                            <span class='my-link' @click="serverPage(post.category, '')">[[ post.category ]]&emsp;</span> 
+                            <span class='my-link' @click="serverPage(post.category,'')">[[ post.category ]]&emsp;</span> 
                             <i class="fas fa-tag"></i> &nbsp; 
                             <span v-for="(tag, index) in post.tags" :key="index"> 
                                 <span v-if="index !== 0">,</span>

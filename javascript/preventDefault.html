@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="cat-2858293_1280.jpg">
+    <script>
+        // 문서가 완전히 로드된 후에 스크립트 실행
+        document.addEventListener('DOMContentLoaded', () => {
+            // 모든 'img' 태그를 선택
+            const imgs = document.querySelectorAll('img');
+    
+            // 각 이미지에 대해 이벤트 리스너 추가
+            imgs.forEach((img) => {
+                img.addEventListener('contextmenu', (event) => {
+                    // 기본 이벤트 (여기서는 오른쪽 클릭에 의한 컨텍스트 메뉴)를 막음
+                    event.preventDefault();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

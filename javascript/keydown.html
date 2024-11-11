@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>글자 수 : 0</h3>
+    <input type="text" name="title" id="title">
+
+    <script>
+        // h3 요소와 input 요소를 선택합니다.
+        const h3 = document.querySelector('h3');
+        const input = document.querySelector('input');
+
+        // input 요소에 keyup 이벤트 리스너를 추가합니다.
+        input.addEventListener('keyup', function(event) {
+            // 입력 필드의 글자 수를 계산합니다.
+            const length = input.value.length;
+
+            // h3 요소의 텍스트를 업데이트합니다.
+            h3.textContent = `글자 수 : ${length}`;
+        });
+    </script>
+</body>
+</html>
