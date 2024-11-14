@@ -6,9 +6,12 @@
     <router-link to="/change">Event</router-link> |
     <router-link to="/key">key</router-link> |
     <router-link to="/render">V-if</router-link> |
-    <router-link to="/rendershow">show</router-link> |
-    <router-link to="/computed">computed</router-link> |
-    <router-link to="/watch">watch</router-link> |
+    <router-link to="/rendershow">Show</router-link> |
+    <router-link to="/computed">Computed</router-link> |
+    <router-link to="/watch">Watch</router-link> |
+    <router-link to="/lifecyclehook">LifeCycleHook</router-link> |
+    <router-link to="/pagetitle">Reuse</router-link> |
+    <router-link to="/parents">parents</router-link> |
   </nav>
   <router-view/>
 </template>

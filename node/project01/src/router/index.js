@@ -65,6 +65,24 @@ const routes = [
     name: 'watch',
     component: () => import(/* webpackChunkName: "watch", webPrefetch:true*/ '../views/Extra/WatchView.vue')
   },
+
+  {
+    path: '/lifecyclehook',
+    name: 'lifecyclehook',
+    component: () => import(/* webpackChunkName: "lifecyclehook", webPrefetch:true*/ '../views/Extra/LifeCycleHookView.vue')
+  },
+
+  {
+    path: '/pagetitle',
+    name: 'pagetitle',
+    component: () => import(/* webpackChunkName: "pagetitle", webPrefetch:true*/ '../views/reuse/PageView.vue')
+  },
+
+  {
+    path: '/parents',
+    name: 'parents',
+    component: () => import(/* webpackChunkName: "parents", webPrefetch:true*/ '../views/reuse/ParentsView.vue')
+  },
 ]
 
 const router = createRouter({

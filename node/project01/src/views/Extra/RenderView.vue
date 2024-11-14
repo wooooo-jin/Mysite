@@ -13,7 +13,7 @@
     <button v-if="userRole==='A'">물품삭제</button>
 
 
-    <p>v-if 세트는 테그가 떨어져있어도 "순서만 지켜주면" 먹는다.</p>    
+    <p>v-if 세트는 테그가 떨어져있어도 "순서만 지켜주면" 먹는다. </p>    
     <p>다른 태그에 있어도 v-if문를 찾아서 순서 먹여줌. 다만 무조건 형제태그여야해</p>
     <br />
 
@@ -74,4 +74,5 @@ export default{
     unmounted(){},
     methods:{}
 }
+
 </script>
