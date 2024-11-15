@@ -1,18 +1,14 @@
 <template>
 <div>
+    <p>{{ childData }}</p>
     <p>{{ str }}</p>
     <p>{{ num }}</p>
     <p>{{ bool }}</p>
     <p>{{ arr }}</p>
-    <p>{{ obj }}</p>
+    <p>{{ obj }}</p>  
     <select name="" id="" @change="callparent" v-model="selectedNum">
         <option :value="n" :key="n" v-for="n in arr">{{ n }}</option>
     </select>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
 </div>
 </template>
 <script>
@@ -54,16 +50,22 @@ export default{
     data(){
         return{
             sampleData:'',
-            selectedNum: 0
+            selectedNum: 0,
+            childData : '이데이터는 자식컴포넌트에서 전달된 데이터입니다.'
         };
     },
     setup(){},
     created(){},
-    mounted(){},
+    mounted(){
+        this.$emit('child-send', this.childData)
+    },
     unmounted(){},
     methods:{
         callparent(){
             this.$emit('change-num', this.selectedNum)
+        },
+        childPrint(){
+            console.log(this.childData)
         }
     }
 }

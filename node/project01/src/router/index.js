@@ -83,6 +83,19 @@ const routes = [
     name: 'parents',
     component: () => import(/* webpackChunkName: "parents", webPrefetch:true*/ '../views/reuse/ParentsView.vue')
   },
+
+  {
+    path: '/grid',
+    name: 'grid',
+    component: () => import(/* webpackChunkName: "grid", webPrefetch:true*/ '../views/reuse/TableView.vue')
+  },
+
+  {
+    path: '/testgrid',
+    name: 'testgrid',
+    component: () => import(/* webpackChunkName: "testgrid", webPrefetch:true*/ '../views/reuse/TestGridView.vue')
+  },
+
 ]
 
 const router = createRouter({

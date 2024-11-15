@@ -12,6 +12,8 @@
     <router-link to="/lifecyclehook">LifeCycleHook</router-link> |
     <router-link to="/pagetitle">Reuse</router-link> |
     <router-link to="/parents">parents</router-link> |
+    <router-link to="/grid">Table</router-link> |
+    <router-link to="/testgrid">TestGrid</router-link> |
   </nav>
   <router-view/>
 </template>

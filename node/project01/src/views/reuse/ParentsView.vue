@@ -1,6 +1,12 @@
 <template>
 <div>
     <h1>Parent Component</h1>
+    <br />
+    <br />
+    <br />
+    <h2>{{ receivedData }}</h2>
+    <h2>{{ childData }}</h2>
+    <button @click="changeValue" class="btn btn-danger">ChildData</button>
     <div>
         <Child 
         str="star" 
@@ -8,7 +14,8 @@
         :bool= false
         :arr = parentArray 
         @change-num="getData"
-        
+        @child-send='getCildData'
+        ref = "child"
         />
     </div>
 </div>
@@ -22,8 +29,10 @@ export default{
     data(){
         return{
             parentNumber:10,
-            parentArray:[1,2,3]
-        };
+            parentArray:[1,2,3],
+            data:{},
+            receivedData : '',
+        }
     },
     setup(){},
     created(){},
@@ -33,6 +42,13 @@ export default{
         getData(data){
             console.log("getData 함수호출");
             console.log(data);
+        },
+        getCildData(data){
+            this.receivedData = data
+        },
+        changeValue(){
+            this.$refs.child.childData = "해당 데이터는 변경되었습니다."
+            this.$refs.child.childPrint()
         }
     }
 }
