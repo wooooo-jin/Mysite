@@ -13,17 +13,30 @@
             <th v-show="SelectedDate === 'all'">
                 <input type="checkbox" name="" id="">
             </th>
+            <th v-show="SelectedDate === 'high'">
+                <input type="radio" name="" id="">
+            </th>            
             <th v-for="col in headers" :key="col">{{ col.title }}</th>
         </tr>
         </thead>
         <tbody>
             <tr v-for="(item, i) in items" :key="i">
             <th v-show="SelectedDate === 'all'">
-                <input type="checkbox" name="" id="">
+                <input type="checkbox" name="" id="" 
+                @change="selectedCheck" 
+                :value="item.exchange" 
+                v-model="checkedItems">
             </th>             
+            <th v-show="SelectedDate === 'high'">
+                <input type="radio" name="" id="" 
+                @change="selectedCheck" 
+                :value="item.exchange" 
+                v-model="checkedItems">
+            </th>                     
             <th v-for="col in headers" :key="col.key">{{item[col.key]}}</th>
             </tr>
         </tbody>
+        
     </table>
 </div>
 </template>
@@ -44,14 +57,16 @@ export default{
             type : Array,
             default : function () {
                 return []
-            }
+            },
+            checkedItems : [],
 
         },
     },
     data(){
         return{
             sampleData:'',
-            SelectedDate: 'all'
+            SelectedDate: 'all',
+            checkedItems: [],
         };
     },
     setup(){},
@@ -62,6 +77,11 @@ export default{
         diffChange () {
             console.log(this.SelectedDate)
             this.$emit("diff-change", this.SelectedDate)
+            this.checkedItems = []
+        },
+        selectedCheck(){
+            console.log(this.items)
+            this.$emit( 'change-item', this.checkedItems)
         }
     }
 }

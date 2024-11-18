@@ -14,6 +14,9 @@
     <router-link to="/parents">parents</router-link> |
     <router-link to="/grid">Table</router-link> |
     <router-link to="/testgrid">TestGrid</router-link> |
+    <router-link to="/SlotModal">SlotModal</router-link> |
+    <router-link to="/provide">ProVide</router-link> |
+    <router-link to="/custom">Advened</router-link> |
   </nav>
   <router-view/>
 </template>

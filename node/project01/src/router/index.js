@@ -54,11 +54,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "rendershow", webPrefetch:true*/ '../views/Extra/RenderShowView.vue')
   },
 
-  {
-    path: '/computed',
-    name: 'computed',
-    component: () => import(/* webpackChunkName: "computed", webPrefetch:true*/ '../views/Extra/ComPutedView.vue')
-  },
 
   {
     path: '/watch',
@@ -95,6 +90,25 @@ const routes = [
     name: 'testgrid',
     component: () => import(/* webpackChunkName: "testgrid", webPrefetch:true*/ '../views/reuse/TestGridView.vue')
   },
+
+  {
+    path: '/SlotModal',
+    name: 'SlotModal',
+    component: () => import(/* webpackChunkName: "SlotModal", webPrefetch:true*/ '../views/reuse/SlotModalView.vue')
+  },
+
+  {
+    path: '/provide',
+    name: 'provide',
+    component: () => import(/* webpackChunkName: "provide", webPrefetch:true*/ '../views/reuse/RootView.vue')
+  },
+
+  {
+    path: '/custom',
+    name: 'custom',
+    component: () => import(/* webpackChunkName: "custom", webPrefetch:true*/ '../views/advenced/CustomView.vue')
+  },
+
 
 ]
 
