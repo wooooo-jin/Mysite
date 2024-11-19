@@ -1,25 +1,22 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/click">Click</router-link> |
-    <router-link to="/change">Event</router-link> |
-    <router-link to="/key">key</router-link> |
-    <router-link to="/render">V-if</router-link> |
-    <router-link to="/rendershow">Show</router-link> |
-    <router-link to="/computed">Computed</router-link> |
-    <router-link to="/watch">Watch</router-link> |
-    <router-link to="/lifecyclehook">LifeCycleHook</router-link> |
-    <router-link to="/pagetitle">Reuse</router-link> |
-    <router-link to="/parents">parents</router-link> |
-    <router-link to="/grid">Table</router-link> |
-    <router-link to="/testgrid">TestGrid</router-link> |
-    <router-link to="/SlotModal">SlotModal</router-link> |
-    <router-link to="/provide">ProVide</router-link> |
-    <router-link to="/custom">Advened</router-link> |
-  </nav>
-  <router-view/>
+<div>
+  <HeaderVue />
+  <div class="container">
+    <router-view/>
+  </div>
+  <FooterLayoutvue />
+</div>
+
 </template>
+<script>
+import HeaderVue from '@/components/layout/Header.vue'
+import FooterLayoutvue from '@/components/layout/FooterLayout.vue'
+export default {
+components: {HeaderVue, FooterLayoutvue}
+}
+
+</script>
+
 
 <style>
 #app {
