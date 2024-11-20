@@ -121,6 +121,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "plugin", webPrefetch:true*/ '../views/advenced/pluginView.vue')
   },
 
+  {
+    path: '/todos',
+    name: 'todos',
+    component: () => import(/* webpackChunkName: "todos", webPrefetch:true*/ '../views/advenced/VuexView.vue')
+  },
+
 
 ]
 

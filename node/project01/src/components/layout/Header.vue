@@ -51,6 +51,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" @click="goToMenu('/mixin')">Reuse</a></li>
             <li><a class="dropdown-item" @click="goToMenu('/plugin')">plugin</a></li>
+            <li><a class="dropdown-item" @click="goToMenu('/todos')">todos</a></li>
           </ul>        
         </li>                
         <li class="nav-item">
