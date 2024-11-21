@@ -127,6 +127,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "todos", webPrefetch:true*/ '../views/advenced/VuexView.vue')
   },
 
+  {
+    path: '/auth',
+    name: 'auth',
+    component: () => import(/* webpackChunkName: "auth", webPrefetch:true*/ '../views/ApiConnect/LoginView.vue')
+  },
 
 ]
 
