@@ -4,7 +4,7 @@ const path = require('path')  // 파일 경로 (모듈)
 
 const users = {};  //데이터 저장소
 
-
+//라우터 만들기
 http.createServer(async (req, res)=> {        //1.if문 <- method  2.if문 <- 첫번째 라우터 3.if문 <-
     try{
         if(req.method === 'GET'){            //GET방식으로 요청을 보내면 요청보낼수 있는게 3개 loot/about/users
