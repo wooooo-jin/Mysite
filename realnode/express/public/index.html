@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- <body>
+    <h1>Send Json</h1>
+    <button id="sendButton">Send Json</button>
+
+    <script>
+        document.getElementById("sendButton").addEventListener('click',async()=>{
+            const jsonData = {name:"Pieter Kim",
+                              age : 20,
+                              gender :"Male"};
+            try { //에러처리
+                const response = await fetch ('/send-json', { //fetch는 실행을 위한 함수가 요청을 보냄 //respons 받기전에 실행이 되어야함
+                    method: 'POST',  
+                    headers: {'Content-Type' : 'application/json'},
+                    body : JSON.stringify(jsonData)
+                });
+
+                const result = await response.json()        // 응답받은 리스폰스
+                alert(`Sever Response: ${result.message}`);
+            }catch(err){
+                console.log(err)
+            }
+        })
+    </script>
+</body> -->
+<!-- <body>
+    <h1>Submit Form</h1>
+    <form action="/form" method="POST">
+        <label for="name">Name :</label>
+        <input for="text" id="name" name="name"><br><br>
+        <label for="age">Age :</label>
+        <input type="number" id="age" name="age"><br><br>
+        <button type="submit">submit</button>
+        </label>
+    </form>
+</body> -->
+<body>
+    <h1>Single File Upload</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" name="files" multiple required>
+      <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
