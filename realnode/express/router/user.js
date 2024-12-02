@@ -13,6 +13,9 @@ router.get('/:id/visd', (req, res)=>{
 router.get('/*', (req, res)=>{
     res.send('Hello zxc');
 });
+router.get('/*', (req, res)=>{
+    res.send('Hello zxc');
+});
 
 
 module.exports = router;
