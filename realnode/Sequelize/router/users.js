@@ -48,13 +48,13 @@ router.get('/:id/comments', async(req, res,next)=>{
             },
         });
         console.log(comment);
-        res.send(comment)
+        res.send(comment);
     }catch(err){
-        console.error(err)
+        console.error(err);
         next(err);
     }
 })
-
+// 아이고
 
 
 
