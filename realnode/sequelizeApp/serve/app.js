@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 // router 가져오기
 const indexRouter = require('./router');
 const userRouter = require('./router/users')
@@ -20,10 +21,10 @@ sequelize.sync({force: false}) // 데이터베이스 연결
     })
 
     // 미들 웨어 설정
-    // app.use(express.static(path.join(__dirname, ' public'))); //static 미들웨어
+    app.use(express.static(path.join(__dirname, ' public'))); //static 미들웨어
     app.use(express.json())
     app.use(express.urlencoded({extended: false}))//바디 파서
-
+    app.use(cors());
     // 라우터 설정
     app.use('/', indexRouter);  //Root page 맨 처음으로 보이는 페이지
     app.use('/user', userRouter);

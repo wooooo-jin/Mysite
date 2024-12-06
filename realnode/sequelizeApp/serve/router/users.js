@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router()
+const router = express.Router();
 const User = require('../models/User');
 const Comments = require('../models/Comments')
 
@@ -15,8 +15,10 @@ const Comments = require('../models/Comments')
 router.route('/')
 .get(async (req,res,next)=>{ // User모델의 데이터 불러오기 요청
     try{
+        console.log(req)
         const users = await User.findAll();
-        res.send(users)// json으로 바꾸기
+        console.log(users)
+        res.json(users)// json으로 바꾸기
     }catch(err){
         console.error(err)
         next(err)
