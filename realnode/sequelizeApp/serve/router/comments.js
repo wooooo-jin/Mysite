@@ -41,7 +41,7 @@ router.route('/:id')
         const {text} = req.body
 
         await Comment.update(
-            {comment : text},
+            {comment : text}, // 택스트 입력
             {where: {id}} //where 조건
         )
         res.end()

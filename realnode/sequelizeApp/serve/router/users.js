@@ -56,12 +56,6 @@ router.get('/:id/comments', async(req, res,next)=>{
         next(err);
     }
 })
-// 아이고
-
-
-
-
-
 
 
 
