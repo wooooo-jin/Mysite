@@ -20,7 +20,7 @@
     </thead>
     <tbody>
         <tr v-for="user in users" :key="user.id" >
-        <td>{{ user.id }}</td>
+        <td>{{ user._id }}</td>
         <td>{{ user.name }}</td>    
         <td>{{ user.age }}</td>        
         <td>{{ user.married ? "기혼" : "미혼" }}</td>
@@ -100,7 +100,7 @@ export default{
     },
     setup(){},
     created(){
-        this.getComments()
+        // this.getComments()
     },
     mounted(){
         this.getUsers()
