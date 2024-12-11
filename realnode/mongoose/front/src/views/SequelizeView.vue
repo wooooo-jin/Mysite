@@ -32,7 +32,7 @@
     <fieldset>
         <legend>댓글등록</legend>
     <div>
-        <input v-model="newComment.userid"  type="text" placeholder="사용자 아이디">
+        <input v-model="searchName"  type="text" placeholder="사용자 이름">
     </div>
     <div>
         <input v-model="newComment.comment" type="text" placeholder="댓글">
@@ -53,11 +53,11 @@
     </thead>
       <tbody>
         <tr v-for="comment in comments" :key="comment.id">
-        <td>{{ comment.id }}</td>
-        <td>{{ comment.User.name }}</td>
+        <td>{{ comment._id }}</td>
+        <td>{{ users.find(user => user._id === comment.commenter)?.name ||''}}</td>
         <td>{{ comment.comment }}</td>
-        <td><button @click="patchComment(comment.id)">수정</button></td>
-        <td><button @click="deleteComment(comment.id)">삭제</button></td>
+        <td><button @click="patchComment(comment._id)">수정</button></td>
+        <td><button @click="deleteComment(comment._id)">삭제</button></td>
       </tr>
       </tbody>
     </table>    
@@ -89,9 +89,10 @@ export default{
                 age: null,
                 married: false,
             },
-            users: [],
-            newComment : {
-                userid :'',
+            users: [],  // 이름, 아이디, 나이, 결혼여부는 여기 저장
+            searchName:'',
+            newComment : { // 반환한 아이디를 여기에 넣어준다.
+                userid :'',  // use objectid  // user의 objectid의 아이디를 여기에 넣어서 사용한다.
                 comment : '',
             }  ,
             comments:[],
@@ -100,7 +101,7 @@ export default{
     },
     setup(){},
     created(){
-        // this.getComments()
+        this.getComments()
     },
     mounted(){
         this.getUsers()
@@ -129,9 +130,11 @@ export default{
             //     const response = await axios.post('http://localhodt:3000/user', this.newUser); //요청을 받은 값을 axios.post는 서버로 데이터를 전달 하는게 끝
             //     this.users = response.data; //user
             //     this.newUser = {new:'', age: null, married:flase} // 초기화 시켜줘야 다시 새로운 값을 받으니 초기화로 비워준다.
+
+                this.newComment.userid = this.searchName
                 await axios.post('http://localhost:3000/user', this.newUser); //요청을 받은 값을
                 this.getUser();
-                this.newUser = {new:'', age: null, married:flase} // 초기화 시켜줘야 다시 새로운 값을 받으니 초기화로 비워준다.
+                this.newUser = {new:'', comment:'', } // 초기화 시켜줘야 다시 새로운 값을 받으니 초기화로 비워준다.
             }catch(err){
                 console.error(err);
             }
@@ -148,15 +151,29 @@ export default{
         },
         // 댓글 등록(psot)
         async postComment(){
-            if (!this.newComment.userid || !this.newComment.comment){
-                alert("사용자의 아이디와 댓을을 입력해");
+            if (!this.searchName || !this.newComment.comment){
+                alert("사용자의 아이디와 댓글을 입력해");
                 return;
             }
             try{
-                console.log('postcomment start')
-                const response = await axios.post('http://localhost:3000/comment', this.newComment)
-                this.getComments()
-                this.newComment = {userid:'', comment: ''}
+                // const user = this.users.find(user => user.name === this.searchName)._id   // obj아이디를 찾는다
+                // console.log(user)
+                // this.newComment.userid = user
+                // console.log(this.searchName)
+                // console.log('postcomment start')
+                // const response = await axios.post('http://localhost:3000/comment', this.newComment)
+                // this.getComments()
+                // this.searchName = '',
+                // this.newComment = {name:'', comment: ''}
+                this.newComment.userid = this.searchName
+                await axios.post('http://localhost:3000/comment',this.newComment);
+                console.log('end postComment');
+                this.getComments();
+                this.newComment = {
+                    userid:'',
+                    comment:'',
+                },
+                this.searchName = ""
             }catch(err){
                 console.error(err)
             }

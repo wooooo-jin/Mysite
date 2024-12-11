@@ -13,7 +13,7 @@ const userSchema = new Schema({
         required:true,
     },
     married:{
-        trpe: Boolean,   //Boolean 조지불리언씨 이름임
+        type: Boolean,   //Boolean 조지불리언씨 이름임
     },
     conmment:{
         type:String,
@@ -22,7 +22,7 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-})
+}, { versionKey : false })
 
 const postSchema = new Schema({
     create: String,

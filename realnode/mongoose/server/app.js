@@ -32,12 +32,12 @@ app.use('/comment', commentRouter);
 // error처리 미들웨어
 app.use((req,res,next)=>{
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`)
-    error.staus = 404;
+    error.status = 404;
     next(error)
 })
 app.use((err, req, res, next)=>{
     console.error(err)
-    res.staus(err.staus || 500).json({error:err.message});
+    res.status(err.status || 500).json({error:err.message});
 })
 app.listen(app.get('port'), ()=>{
     console.log(`${app.get('port')} 서버 대기중`)
