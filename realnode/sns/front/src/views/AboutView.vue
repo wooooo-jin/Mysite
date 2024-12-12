@@ -19,7 +19,9 @@ export default{
     };
   },
   setup(){},
-  created(){},
+  created(){
+    
+  },
   mounted(){
     this.test() 
   },
