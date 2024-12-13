@@ -10,6 +10,6 @@ exports.isNotLoggdIn = (req, res, next) =>{
     if(!req.isAuthenticated()){
         next()
     } else {
-        res.status(403).json({message: "이미 로그인한 상태입니다."})
+        res.status(403).json({message: "이미 로그인한 상태입니다."}) //에러 처리로 응답을 해준다.
     }
 }

@@ -1,6 +1,8 @@
 const User = require("../schemas/users");
 const crypto = require("crypto");
 const dotenv = require("dotenv");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 
 dotenv.config()
 
@@ -25,20 +27,54 @@ exports.join = async (req, res, next) =>{  // 비동기 함수를 사용할 거�
             snsId : snsid,
             password : hash,
             email,
-            phonNB:phon,
+            phonNB:phone,
             nick
         });
-        return res.redurect('/',)
+        return res.redirect('/',)
     } catch(err) {
         console.error(err)
         return next(err)
     }
 }
 
+//local Strategy
+passport.use(new LocalStrategy({ // passport인증전략  LocalStrategy를 불러오는 것은 local
+    usernameField: 'snsid', // 사용자 아이디
+    passwordField: 'password',  // 사용자가 입력한 password //단방향 암호화를 했다.
+    passReqToCallback : false, //콜백함수에 req객체도 전달을 할 건지 할거면 true        콜백함수에 req객체 전달 안함.
+
+},async (snsid, password, done)=>{  // done은 다 끝나고 나서 next역할 다 끝났다를 알려줌
+    try{
+        console.log("001")
+        const user = await User.findOne({snsId : snsid}); // 가입 회원 찾기
+        console.log(user) //나오면 값이 제대로 들어옴
+        if(!user){
+            console.log("002")
+            return done(null, false, {message: '가입되지 않은 회원입니다.'}) // null은 빈값 db연결 실패하면 에러
+            // done은 콜백 함수 doen(error(Error|null), user(Object|false), info(Object|undifined))
+        }
+        //비밀번호 검증
+        const salt = process.env.SALT // 데이터베이스에서 암호화한 password와 사용자가 입력한 password의 데이터가 다르기 때문에 사용자가 입력한 password도 암호화 해서 서로 같은지 확인을 해주는 작업을 한다.
+        const hash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
+        console.log(hash)
+        if (user.password !== hash){
+            console.log("003") // 여기에 문제가 있다고 알려주겠죠 안찍히면 문제없
+            return done(null, false, {message:"비밀번호가 일치하지 않습니다."}) 
+        }
+        console.log("0063")
+        return done(null, user) //user 정보는 object 정보로 받는다.
+    } catch(err){
+        console.error(err)
+        return next(err)
+    }
+})
+)
+
 // 로그인 
 // passport 가지고 로그인 기능을 만듬
 exports.login = (req, res, next)=>{
     passport.authenticate('local', (authError, user, info)=>{ // local은 passport에서 값을 만들어 줘야함 passport라는 폴더를 만들고 local을 정의 해줘야함
+        console.log(user) // user정보가 들오면 로그에 찍혀야 정상
         if (authError){                       // info는 비밀번호가 틀렸음 이라는 실패의 원인들을 메세지로 들어오게 만들어줌
             console.error(authError);
             return next(authError); //에러 들어옴
@@ -58,7 +94,7 @@ exports.login = (req, res, next)=>{
 
 // 로그아웃
 exports.logout = (req,res) =>{
-    req,logout((err)=>{
+    req.logout((err)=>{
         if(err){
             console.error(err);
             return res.redirect('/?error=logout_failed')

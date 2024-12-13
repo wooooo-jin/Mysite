@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        maxlength: 100,
+        maxlength: 160,
     },
     email: {
         type: String,
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
         default:null
     },
 },{ timestamps: false,
-    conllation:'users'
+    collaction:'users'
 })  
 
 const User = mongoose.model('User', userSchema)

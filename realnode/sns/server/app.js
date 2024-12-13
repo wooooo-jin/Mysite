@@ -7,7 +7,7 @@ const cors = require("cors"); // 연결시키는 용도로만 사용
 const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport"); //session이 있어야지 사용 가능
-
+const LocalStrategy = require("passport-local"); //dnlclsms passport 밑에
 
 
 
@@ -15,7 +15,16 @@ const passport = require("passport"); //session이 있어야지 사용 가능
 dotenv.config()
 // router import
 const pageRouter = require("./routes/pageRouter");
-const authRouter = require('./routes/authRouter');
+const authRouter = require("./routes/authRouter");
+const postRotuer = require("./routes/postRouter");
+
+
+//스키마 import
+const User = require("./schemas/users");
+const Post = require("./schemas/posts");
+const Hashtag = require("./schemas/hashtags");
+
+
 
 // webserver
 const app = express();
@@ -45,14 +54,31 @@ app.use(session({           // 안전하게 데이터 저장후 전달해주는�
         //여기까지 세션 만들기
     }
 }))
-// 전략 인증
+// 전략 인증 passport
 app.use(passport.initialize());
 app.use(passport.session()); //우리는 인증 전력으로 session을 사용할 것이다.  //여기서 import함 index.js에 필요한거
 
+//passport -serialize : 세션에 사용자 id 저장 //세션에 저장하고 계속 감시를 함 받은 세션정보에서 그 사람이 맞는지 아닌지 확인
+passport.serializeUser((user, done)=> {
+    console.log('SerializeUser:', user) //암호화 저장이 아니고 사용자 이름 이런것중 어떤걸 저장할지 정한다.
+    done(null, user._id)
+})
+
+//passport-deserialize : 세션에 사용자 정보 복원
+passport.deserializeUser(async(id, done)=>{ 
+    try{       //db랑 데이터가 같은지 맞춰보고 세션정보에 있는걸 유저정보가 맞으면 유지하고 아니면 에러창 띄우고
+        const user = await User.findById(id);
+        done(null, user);
+    }catch(err){
+        console.error(err)
+        done(err)
+    }
+})
 
 // router
 app.use('/',pageRouter);
-app.use('/auth', authRouter)
+app.use('/auth', authRouter);
+app.use('/post', postRotuer);
 
 
 
