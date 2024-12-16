@@ -4,7 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const { isLoggdIn } = require('../middleware');
-const { afterUploadImage, uploadPost} = require('../controller/post');
+const { afterUploadImage, uploadPost, updatePost, deletePost} = require('../controller/post');
 
 
 //라우터
@@ -37,6 +37,15 @@ router.post('/img', isLoggdIn, upload.single('img'), afterUploadImage);
 //post
 const upload2 = multer()
 router.post('/', isLoggdIn, upload2.none(), uploadPost);
+
+
+// post/update
+router.post('/update/:postId', isLoggdIn, upload2.none(), updatePost)  //id는 게시글 번호
+
+
+// post/delete
+router.delete('/delete/:postId', isLoggdIn, deletePost)
+
 
 module.exports = router;
 

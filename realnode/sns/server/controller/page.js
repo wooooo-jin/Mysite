@@ -9,8 +9,8 @@ exports.renderProfile = (req, res)=>{
 
 exports.renderJoin = (req, res)=>{
     res.render('join', {title: '회원가입 - sns'})
-}
-
+};
+//조회
 exports.renderMain = async(req,res,next)=>{
     try{
         const posts = await Post.find()
@@ -23,4 +23,9 @@ exports.renderMain = async(req,res,next)=>{
         console.error(err)
         next(err)
     }
-}
+};
+
+
+
+
+

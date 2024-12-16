@@ -14,6 +14,7 @@ exports.uploadPost = async(req, res, next) => {
             img: req.body.url,
             user: req.user._id  // 로그인을 하면 req로 유저 정보
         });
+
         const hashtags = req.body.content.match(/#[^\s#]*/g); //정규 표현식을 사용해서 빼준다. // #여행 #사진 #일본 #제ㅗㅇ
         if(hashtags){
             const result = await Promise.all( 
@@ -35,4 +36,51 @@ exports.uploadPost = async(req, res, next) => {
         next(err)
     }
 }
+
+// 게시물 수정
+exports.updatePost = async (req,res,next)=>{
+    try{
+        const {postId} = req.params;
+        const { content, img } = req.body
+
+        const updateData = { content, img } // 바뀐 해쉬태그 데이터를 다시 여기에 넣어준다.
+
+        const hashtags = content.match(/#[^\s#]+/g);
+
+        if (hashtags) {
+            const hashtagDocs = await Promise.all(
+                hashtags.map(async (tag)=>{
+                    const title = tag.slice(1).toLowerCase().trim();
+                    console.log(title)
+                    let hashtag = await Hashtag.findOne({title}); //db에서 해쉬태그가 있는지 찾아서 값을줌 
+                    if (!hashtag) {
+                        hashtag =  await Hashtag.create({title});
+                        console.log('해시태그',hashtag)
+                    }
+                    return hashtag
+                })
+            );
+            updateData.hashtag = hashtagDocs
+        }   // new:true는 수정된 반환값
+        const updatePost = await Post.findByIdAndUpdate(postId, updateData, {new:true}); //findByIdAndUpdate 업데이트된 값만
+        res.json(updatePost)
+    } catch(err) {
+        console.error(err);
+        next(err);
+    }
+}
+
+// 게시물 삭제
+exports.deletePost = async(req,res,next)=>{
+    try{
+        const {postId} = req.params;
+        await Post.findOneAndDelete(postId);
+        res.json({message:'Delete Success'})
+    }catch(err){
+        console.error(err);
+        next(err);
+    }
+}
+
+
 
